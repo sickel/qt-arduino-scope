@@ -1,4 +1,5 @@
 #include <qwidget.h>
+#include <QRadioButton>
 
 class Plot;
 class Knob;
@@ -28,6 +29,6 @@ private:
     WheelBox *d_timerWheel;
     WheelBox *d_intervalWheel;
     WheelBox *d_offsetWheel;
-
+    QRadioButton *d_synclock;
     Plot *d_plot;
 };
