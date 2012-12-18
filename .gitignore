@@ -2,3 +2,8 @@ Makefile
 *.o
 \#*
 *~
+moc
+moc*
+*.pro.user
+bin/*
+bin
