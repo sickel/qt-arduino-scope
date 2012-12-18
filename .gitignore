@@ -1,2 +1,5 @@
+oscilloscope.pro.*
+Makefile
+bin
 obj
-moc/*
+*.o
