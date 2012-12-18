@@ -11,6 +11,30 @@
 #include <qwt_painter.h>
 #include <qevent.h>
 
+/*
+
+    fileName = QFileDialog::getSaveFileName(this, tr("File name"), QString(), "Graphic files (*.svg,*png)");
+    QImage pixmap;
+ int options = QwtPlotPrintFilter::PrintAll;
+options &= ~QwtPlotPrintFilter::PrintBackground;
+options |= QwtPlotPrintFilter::PrintFrameWithScales;
+ 
+QPainter painter(800,600,QImage::Format_RGB32);
+ 
+print(pixmap,filter);
+ 
+if( pixmap.save(fileName, "png" ))
+qDebug()<<"OK";
+else
+qDebug()<<"Uhm...";
+
+
+    }
+
+
+*/
+
+
 Plot::Plot( QWidget *parent ):
     QwtPlot( parent ),
     d_paintedPoints( 0 ),
