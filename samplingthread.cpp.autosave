@@ -86,7 +86,7 @@ double SamplingThread::value( double timeStamp )
          QString s=strng.left(j-1);
          v=s.toFloat();
          buffer=strng.right(j+1);
-         qDebug() << s << "|" << buffer << "\n";
+         qDebug() strng<<"|"<< s << "|" << buffer << "\n";
          /*buffer.clear();
          buffer.append(s);*/
          return v*d_amplitude/5;

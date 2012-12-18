@@ -1,4 +1,8 @@
 #include <qwt_sampling_thread.h>
+#include <qextserialport.h>
+#include <qextserialenumerator.h>
+#include <qextserialport_global.h>
+
 
 class SamplingThread: public QwtSamplingThread
 {
@@ -18,8 +22,11 @@ protected:
     virtual void sample( double elapsed );
 
 private:
-    virtual double value( double timeStamp ) const;
-
+    virtual double value( double timeStamp );
+    double factor;
     double d_frequency;
     double d_amplitude;
+    QextSerialPort* port;
+    QString buffer;
+
 };

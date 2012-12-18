@@ -9,7 +9,13 @@
 
 include( $${PWD}/../examples.pri )
 
+INCLUDEPATH += /usr/include/QtExtSerialPort
+INCLUDEPATH += /usr/include
+QT += serialport
+
 TARGET   = oscilloscope
+LIBS += -lqextserialport
+DEFINES = _TTY_POSIX_
 
 HEADERS = \
     signaldata.h \
