@@ -140,6 +140,16 @@ void Plot::setIntervalLength( double interval )
     }
 }
 
+void Plot::setOffset( double offset )
+{
+    if ( offset > -200.0 && offset < 200)
+    {
+        setAxisScale( QwtPlot::yLeft, -200.0-offset, 200.0-offset );
+        replot();
+    }
+}
+
+
 void Plot::updateCurve()
 {
     CurveData *data = ( CurveData * )d_curve->data();
