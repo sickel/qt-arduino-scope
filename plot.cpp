@@ -128,9 +128,9 @@ void Plot::start()
 void Plot::saveImage(){
 
 #ifndef QT_NO_PRINTER
-    QString fileName = "friedberg.pdf";
+    QString fileName = "oscilloscope.pdf";
 #else
-    QString fileName = "friedberg.png";
+    QString fileName = "oscilloscope.png";
 #endif
 
 #ifndef QT_NO_FILEDIALOG

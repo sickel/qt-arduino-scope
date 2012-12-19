@@ -6,6 +6,8 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <QRadioButton>
+#include <QtGui/QPushButton>
+
 
 MainWindow::MainWindow( QWidget *parent ):
     QWidget( parent )
@@ -26,7 +28,7 @@ MainWindow::MainWindow( QWidget *parent ):
 
     d_synclock = new QRadioButton("Synclock");
 
-
+    d_saveImageBtn = new QPushButton("Save Image");
     d_offsetWheel = new WheelBox( "Offset", -200.0, 200.0, 1.0, this );
     d_offsetWheel->setValue(0 );
 
@@ -43,6 +45,7 @@ MainWindow::MainWindow( QWidget *parent ):
     vLayout1->addStretch( 10 );
     vLayout1->addWidget( d_amplitudeKnob );
     vLayout1->addWidget( d_frequencyKnob );
+    vLayout1->addWidget(d_saveImageBtn);
     QHBoxLayout *layout = new QHBoxLayout( this );
     layout->addWidget( d_plot, 10 );
     layout->addLayout( vLayout1 );
@@ -59,6 +62,8 @@ MainWindow::MainWindow( QWidget *parent ):
     connect( d_offsetWheel, SIGNAL( valueChanged( double ) ),
         d_plot, SLOT( setOffset( double ) ) );
 
+    connect( d_saveImageBtn, SIGNAL(clicked()),
+             d_plot, SLOT(saveImage()));
 }
 
 void MainWindow::start()
