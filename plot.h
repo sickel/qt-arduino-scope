@@ -1,6 +1,7 @@
 #include <qwt_plot.h>
 #include <qwt_interval.h>
 #include <qwt_system_clock.h>
+#include <qfiledialog.h>
 
 class QwtPlotCurve;
 class QwtPlotMarker;
@@ -20,6 +21,7 @@ public:
 public Q_SLOTS:
     void setIntervalLength( double );
     void setOffset(double);
+    void saveImage();
 protected:
     virtual void showEvent( QShowEvent * );
     virtual void resizeEvent( QResizeEvent * );
