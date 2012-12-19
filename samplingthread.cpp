@@ -20,15 +20,21 @@ SamplingThread::SamplingThread( QObject *parent ):
     PortSettings portSettings;
     portSettings.BaudRate = BAUD9600;
     portSettings.DataBits = DATA_8;
-   // portSettings.Parity = PAR_NONE;
+    portSettings.Parity = PAR_NONE;
    // portSettings.StopBits = STOP_1;
    // portSettings.FlowControl = FLOW_OFF;
    // portSettings.Timeout_Millisec = 0;
     port = new QextSerialPort("/dev/ttyACM0",portSettings);
     bool res = false;
     res = port->open(QextSerialPort::ReadOnly);
-    if(res)
+    if(res){
         qDebug("Connected!!\n");
+        // Throws away data waiting:
+        QByteArray inpt;
+        int a = port->bytesAvailable();
+        inpt.resize(a);
+        port->read(inpt.data(), inpt.size());
+    }
     else
         qDebug("Connection failed!!\n");
 }
@@ -82,11 +88,15 @@ double SamplingThread::value( double timeStamp )
     // qDebug() << "bytes:" << buffer<<"\n";
      QString strng=buffer+QString::fromAscii(inpt);
      int j=strng.indexOf("\n");
+     if(j==1) {
+         qDebug() << "-"<<strng <<"-";
+         strng=strng.right(1);
+     }
      if(j>-1){
          QString s=strng.left(j-1);
          v=s.toFloat();
-         buffer=strng.right(j+1);
-         qDebug() << s << "|" << buffer << "\n";
+         buffer=strng.mid(j+1,-1);
+         qDebug() << strng<<"=>"<< s << "<="<<j<<">" << buffer << "\n";
          /*buffer.clear();
          buffer.append(s);*/
          return v*d_amplitude/5;

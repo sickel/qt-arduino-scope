@@ -3,3 +3,5 @@ Makefile
 bin
 obj
 *.o
+debug
+*.autosave
