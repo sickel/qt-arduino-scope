@@ -14,3 +14,7 @@ Makefile
 *.lai
 *.la
 *.a
+*.autosave
+bin
+oscilloscope.pro.user
+moc
