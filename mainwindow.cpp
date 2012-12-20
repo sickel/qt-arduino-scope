@@ -23,12 +23,17 @@ MainWindow::MainWindow( QWidget *parent ):
     d_intervalWheel = new WheelBox( "Displayed [s]", 1.0, 100.0, 1.0, this );
     d_intervalWheel->setValue( intervalLength );
 
+    d_offsetWheel = new WheelBox( "Offset", -200.0, 200.0, 1.0, this );
+    d_offsetWheel->setValue(0 );
+
+
     d_timerWheel = new WheelBox( "Sample Interval [ms]", 0.0, 20.0, 0.1, this );
     d_timerWheel->setValue( 10.0 );
 
     QVBoxLayout* vLayout1 = new QVBoxLayout();
     vLayout1->addWidget( d_intervalWheel );
     vLayout1->addWidget( d_timerWheel );
+    vLayout1->addWidget(d_offsetWheel);
     vLayout1->addStretch( 10 );
     vLayout1->addWidget( d_amplitudeKnob );
     vLayout1->addWidget( d_frequencyKnob );
@@ -46,6 +51,9 @@ MainWindow::MainWindow( QWidget *parent ):
 
     connect( d_intervalWheel, SIGNAL( valueChanged( double ) ),
         d_plot, SLOT( setIntervalLength( double ) ) );
+    connect( d_offsetWheel, SIGNAL( valueChanged( double ) ),
+        d_plot, SLOT( setOffset( double ) ) );
+
 }
 
 void MainWindow::start()

@@ -27,6 +27,7 @@ private:
     Knob *d_amplitudeKnob;
     WheelBox *d_timerWheel;
     WheelBox *d_intervalWheel;
+    WheelBox *d_offsetWheel;
 
     Plot *d_plot;
 };
