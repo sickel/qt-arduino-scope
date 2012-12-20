@@ -28,5 +28,6 @@ private:
     double d_amplitude;
     QextSerialPort* port;
     QString buffer;
+    int traway;
 
 };
