@@ -5,3 +5,5 @@ obj
 *.o
 debug
 *.autosave
+moc_*
+debug*
