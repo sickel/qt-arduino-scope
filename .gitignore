@@ -19,7 +19,6 @@ debug*
 *.la
 *.a
 *.autosave
+*.pro.user
+bin/*
 bin
-oscilloscope.pro.user
-
-
