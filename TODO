@@ -1,4 +1,5 @@
-- Tear out the last parts of the "signal generator" code from the example
+- selectable port
+- Tear out the last parts of the "signal generator" code from the example (or maybe, make it available as a testing function?)
 - Visual indications on overflow and underflow (overflow: The data comes in much faster than the acuisition rate, 
   when more than ten measurements are piled up, they are thrown away, underflow: The acuisition rate is so high that
   a large number of samples are empty or partial)
