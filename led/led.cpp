@@ -30,7 +30,10 @@ Led::Led(QWidget * parent):WidgetWithBackground(parent)
   m_color = Qt::red; 
   resize(10,10);
 }
-
+bool Led::isChecked () const
+{
+  return m_checked;
+}
 
 QSize Led::sizeHint() const
 {

@@ -45,6 +45,7 @@
      
      bool isChecked () const ; 
      
+     virtual QSize sizeHint() const;
      QColor color() const;
      void setColor(QColor); 
      
