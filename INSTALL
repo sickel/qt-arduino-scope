@@ -1,0 +1,18 @@
+To install:
+
+on linux:
+install qt4-dev and qwt-dev, qextserialport
+
+compile and install the led widget (in ./led)
+
+run qmake, then make
+
+the binary shows up as bin/oscilloscope
+
+Before starting the application, run the sketch Voltmeter.ino on the arduino board
+
+The serial port is still hardcoded. It must have the same speed in Voltmeter.ino 
+and samplinthread.cpp.
+
+I hope to be able to make a deb package out of this later on...
+

@@ -1,0 +1,16 @@
+Some usage tips:
+
+Displayed: How many secounds are shown across the display
+
+Sample interval:How often is the serial port polled. If the interval is too large, 
+data will pile up. If more than ten measurements are waiting, they will be dircarded, the red led is then flashing.
+
+Offset, moves the zeropoint up or down.
+
+Synclock -still not implemented
+
+Amplitude: Amplification factor for the signal
+
+For a standart arduino, offset should be -200 and the amplitude 400.
+
+Save image:Saves the current display as an image.

@@ -12,19 +12,22 @@
 
 SamplingThread::SamplingThread( QObject *parent ):
     QwtSamplingThread( parent ),
-    d_frequency( 5.0 ),
-    d_amplitude( 20.0 )
+  //  d_frequency( 5.0 ),
+    d_amplitude( 400.0 )
 {
     factor=1.8;
     // http://automon.donaloconnor.net/qt-and-qextserialport/34/
     PortSettings portSettings;
-    portSettings.BaudRate = BAUD9600;
+    portSettings.BaudRate = BAUD57600;
     portSettings.DataBits = DATA_8;
     portSettings.Parity = PAR_NONE;
    // portSettings.StopBits = STOP_1;
    // portSettings.FlowControl = FLOW_OFF;
    // portSettings.Timeout_Millisec = 0;
-    port = new QextSerialPort("/dev/ttyACM1",portSettings);
+    //
+    //
+    // Setting port here:
+    port = new QextSerialPort("/dev/ttyACM0",portSettings);
     bool res = false;
     res = port->open(QextSerialPort::ReadOnly);
     if(res){
@@ -35,10 +38,6 @@ SamplingThread::SamplingThread( QObject *parent ):
         qDebug()<< a << "\n";
         inpt.resize(a);
         port->read(inpt.data(), inpt.size());
-       /* a = port->bytesAvailable();
-        qDebug()<< a << "\n";
-        inpt.resize(a);
-        port->read(inpt.data(), inpt.size());*/
     }
     else
         qDebug("Connection failed!!\n");
@@ -77,19 +76,17 @@ double SamplingThread::value( double timeStamp )
 {
     double v;
     traway++;
-    // Throws away data if too much (should only happen at startup)
+    emit overload(false); // turns of overload led (in case it was on)
     if(buffer.count("\n")>10){
         buffer=buffer.mid(buffer.lastIndexOf("\n")+1,-1);
         qDebug()<<traway << "overrun\n";
         traway=0;
+        emit overload(true); // makes the red "led" flash.
     }
     QByteArray inpt;
     int a = port->bytesAvailable();
     inpt.resize(a);
-   // qDebug()<<a << "\n";
     port->read(inpt.data(), inpt.size());
-    //qDebug() << "bytes read:" << bytes.size();
-    // qDebug() << "bytes:" << buffer<<"\n";
     QString strng=buffer+QString::fromAscii(inpt);
     int j=strng.indexOf("\n");
     if(j==1) {
@@ -99,10 +96,8 @@ double SamplingThread::value( double timeStamp )
     if(j>-1){
         QString s=strng.left(j-1);
         v=s.toFloat();
+        // Saves for next time what has so far not been read:
         buffer=strng.mid(j+1,-1);
-        //  qDebug() << strng<<"=>"<< s << "<="<<j<<">" << buffer << "\n";
-        /*buffer.clear();
-        buffer.append(s);*/
         return v*d_amplitude/5;
     }
 

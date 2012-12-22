@@ -11,8 +11,12 @@ include( examples.pri )
 
 INCLUDEPATH += /usr/include/QtExtSerialPort
 INCLUDEPATH += /usr/include
-QT += serialport
+INCLUDEPATH += /usr/lib/qt4/examples/designer/qledplugin/
 
+QT += serialport
+QT+=qledplugin
+
+LIBS += -lqledplugin
 TARGET   = oscilloscope
 LIBS += -lqextserialport
 DEFINES = _TTY_POSIX_
@@ -24,7 +28,10 @@ HEADERS = \
     wheelbox.h \
     samplingthread.h \
     curvedata.h \
-    mainwindow.h 
+    led/widgetwithbackground.h \
+    led/led.h  \
+    mainwindow.h
+
 
 SOURCES = \
     signaldata.cpp \
@@ -34,4 +41,6 @@ SOURCES = \
     samplingthread.cpp \
     curvedata.cpp \
     mainwindow.cpp \
+    led/widgetwithbackground.cpp \
+    led/led.cpp \
     main.cpp

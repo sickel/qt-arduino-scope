@@ -14,6 +14,9 @@ public:
     double frequency() const;
     double amplitude() const;
 
+Q_SIGNALS:
+    bool overload(bool);
+
 public Q_SLOTS:
     void setAmplitude( double );
     void setFrequency( double );
