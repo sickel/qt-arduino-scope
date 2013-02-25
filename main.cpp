@@ -9,14 +9,19 @@ int main( int argc, char **argv )
 
     MainWindow window;
     window.resize( 800, 400 );
-
+   
     SamplingThread samplingThread;
+    if(argc==1){
+      samplingThread.setPort(QString('/dev/ttyUSB0'));
+    }else{
+      samplingThread.setPort(argv[1]);
+    }
     QObject::connect(&samplingThread, SIGNAL(overload(bool)),
                      &window,  SLOT( swoverloadled(bool ) ));
   //  samplingThread.setFrequency( window.frequency() );
   //  samplingThread.setAmplitude( window.amplitude() );
     samplingThread.setInterval( window.signalInterval() );
-
+   
 //    window.connect( &window, SIGNAL( frequencyChanged( double ) ),
 //        &samplingThread, SLOT( setFrequency( double ) ) );
     window.connect( &window, SIGNAL( amplitudeChanged( double ) ),
@@ -25,12 +30,12 @@ int main( int argc, char **argv )
         &samplingThread, SLOT( setInterval( double ) ) );
 
     window.show();
-
+    
     samplingThread.start();
     window.start();
 
     bool ok = app.exec();
-
+    
     samplingThread.stop();
     samplingThread.wait( 1000 );
 

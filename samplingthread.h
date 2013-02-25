@@ -13,7 +13,8 @@ public:
 
     double frequency() const;
     double amplitude() const;
-
+    void setPort(QString port);
+    
 Q_SIGNALS:
     bool overload(bool);
 
@@ -29,6 +30,7 @@ private:
     double factor;
     double d_frequency;
     double d_amplitude;
+    QString portname;
     QextSerialPort* port;
     QString buffer;
     int traway;

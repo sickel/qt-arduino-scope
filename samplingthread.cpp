@@ -16,6 +16,16 @@ SamplingThread::SamplingThread( QObject *parent ):
     d_amplitude( 400.0 )
 {
     factor=1.8;
+}
+
+
+
+
+void SamplingThread::setPort(QString qsport)
+{
+  qDebug() << qsport;
+  portname=qsport;
+  qDebug() <<portname;
     // http://automon.donaloconnor.net/qt-and-qextserialport/34/
     PortSettings portSettings;
     portSettings.BaudRate = BAUD57600;
@@ -27,7 +37,8 @@ SamplingThread::SamplingThread( QObject *parent ):
     //
     //
     // Setting port here:
-    port = new QextSerialPort("/dev/ttyACM0",portSettings);
+       qDebug() <<portname;
+    port = new QextSerialPort(portname,portSettings);
     bool res = false;
     res = port->open(QextSerialPort::ReadOnly);
     if(res){
@@ -42,6 +53,7 @@ SamplingThread::SamplingThread( QObject *parent ):
     else
         qDebug("Connection failed!!\n");
 }
+
 
 void SamplingThread::setFrequency( double frequency )
 {
